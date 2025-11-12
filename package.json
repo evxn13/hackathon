@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "check": "node check-config.js"
+    "check": "node check-config.js",
+    "check-deploy": "node check-deployment.js"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.27.0",

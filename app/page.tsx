@@ -192,13 +192,13 @@ export default function HomePage() {
       </section>
 
       {/* Footer */}
-      <footer className="border-t border-gray-200 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <footer className="border-t border-gray-200 bg-white mt-16">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
           <div className="text-center text-gray-600">
-            <p className="mb-2">
+            <p className="mb-3 text-base">
               Projet réalisé pour le hackathon Code4Sud
             </p>
-            <p className="text-sm">
+            <p className="text-sm text-gray-500">
               Solution propulsée par Claude AI • Données officielles INSEE
             </p>
           </div>
