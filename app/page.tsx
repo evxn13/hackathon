@@ -24,9 +24,9 @@ export default function HomePage() {
   useEffect(() => {
     const currentWord = rotatingWords[wordIndex];
 
-    const typingSpeed = 80;  
-    const deletingSpeed = 50;    
-    const holdTime = 1000;      
+    const typingSpeed = 80;
+    const deletingSpeed = 50;
+    const holdTime = 1000;
 
     let timeout: ReturnType<typeof setTimeout>;
 
@@ -229,18 +229,18 @@ export default function HomePage() {
             </p>
 
             <Link href="/auth/register">
-            <Button
-  size="lg"
-  className="
+              <Button
+                size="lg"
+                className="
     text-lg px-8 
     bg-white/20 backdrop-blur-md text-white border border-white/40 
     hover:bg-white/30 hover:border-white/60 
     transition-all duration-300
   "
->
-  Créer mon compte gratuitement
-  <ArrowRight className="w-5 h-5 ml-2" />
-</Button>
+              >
+                Créer mon compte gratuitement
+                <ArrowRight className="w-5 h-5 ml-2" />
+              </Button>
 
             </Link>
           </CardContent>
