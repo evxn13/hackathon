@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { createClient } from '@/lib/supabase/client';
-import { SiretInput } from '@/components/dashboard/SiretInput';
+import { CompanyInput } from '@/components/dashboard/CompanyInput';
 import { CompanyCard } from '@/components/dashboard/CompanyCard';
 import { AidesCarousel } from '@/components/dashboard/AidesCarousel';
 import { RevenueChart } from '@/components/dashboard/RevenueChart';
@@ -183,10 +183,10 @@ export default function DashboardPage() {
       {/* Main Content */}
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="space-y-8">
-          {/* SIRET Input Section */}
+          {/* Company Input Section */}
           {!company && (
             <div className="max-w-2xl mx-auto">
-              <SiretInput onCompanyFound={handleCompanyFound} />
+              <CompanyInput onCompanyFound={handleCompanyFound} />
             </div>
           )}
 
