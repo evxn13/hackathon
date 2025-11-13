@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import { createClient } from '@/lib/supabase/client';
 import { CompanyInput } from '@/components/dashboard/CompanyInput';
 import { CompanyCard } from '@/components/dashboard/CompanyCard';
-import { AidesCarousel } from '@/components/dashboard/AidesCarousel';
+import { AidesGeoDisplay } from '@/components/dashboard/AidesGeoDisplay';
 import { RevenueChart } from '@/components/dashboard/RevenueChart';
 import { Button } from '@/components/ui/Button';
 import { Card, CardContent } from '@/components/ui/Card';
@@ -228,9 +228,9 @@ export default function DashboardPage() {
                 />
               )}
 
-              {/* Aides Carousel */}
+              {/* Aides Display */}
               {aides.length > 0 && (
-                <AidesCarousel aides={aides} onAideDeleted={handleAideDeleted} />
+                <AidesGeoDisplay aides={aides} company={company} onAideDeleted={handleAideDeleted} />
               )}
 
               {/* New Analysis Button */}
