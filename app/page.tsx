@@ -223,7 +223,7 @@ export default function HomePage() {
                 Analyse automatique
               </h3>
               <p className="text-gray-600">
-                Entrez votre <strong>SIRET</strong> et nous récupérons automatiquement vos données via l’API INSEE.
+                Entrez votre <strong>SIRET</strong> et nous récupérons automatiquement vos données via l’API <strong>INSEE</strong>.
               </p>
             </CardContent>
           </Card>
@@ -237,7 +237,7 @@ export default function HomePage() {
                 IA personnalisée
               </h3>
               <p className="text-gray-600">
-                Analyse intelligente de votre profil et recommandation d’aides pertinentes.
+                <strong>Analyse intelligente</strong> de votre profil et <strong>recommandation d’aides</strong> pertinentes.
               </p>
             </CardContent>
           </Card>
@@ -251,7 +251,7 @@ export default function HomePage() {
                 Projection financière
               </h3>
               <p className="text-gray-600">
-                Visualisez l’impact des aides sur votre chiffre d’affaires.
+                <strong>Visualisez</strong> l’impact des <strong>aides</strong> sur votre chiffre d’affaires.
               </p>
             </CardContent>
           </Card>
