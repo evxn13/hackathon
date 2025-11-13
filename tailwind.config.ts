@@ -23,8 +23,24 @@ const config: Config = {
           950: '#172554',
         },
       },
+      keyframes: {
+        fadeInUp: {
+          '0%': {
+            opacity: '0',
+            transform: 'translateY(8px)',
+          },
+          '100%': {
+            opacity: '1',
+            transform: 'translateY(0)',
+          },
+        },
+      },
+      animation: {
+        'fade-in-up': 'fadeInUp 0.35s ease-out',
+      },
     },
   },
   plugins: [],
 };
+
 export default config;
