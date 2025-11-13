@@ -30,10 +30,12 @@ export interface Company {
   code_ape: string;
   effectif: string;
   localisation: string;
-  code_postal: string;
+  code_postal: string; // Deprecated: kept for backward compatibility
+  code_postaux?: string[]; // Array of postal codes where company operates
   ca_actuel?: number;
   date_creation: string;
   forme_juridique?: string;
+  emploi_handicap?: boolean;
   created_at: string;
   updated_at: string;
 }

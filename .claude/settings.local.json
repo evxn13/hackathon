@@ -3,7 +3,8 @@
     "allow": [
       "Bash(npx create-next-app@latest:*)",
       "Bash(node --version)",
-      "Bash(npm --version:*)"
+      "Bash(npm --version:*)",
+      "Bash(npx supabase db push)"
     ],
     "deny": [],
     "ask": []

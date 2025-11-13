@@ -159,6 +159,7 @@ export async function POST(request: NextRequest) {
       effectif: mock.effectif,
       localisation: mock.localisation,
       code_postal: mock.code_postal,
+      code_postaux: [mock.code_postal], // Convert to array for new schema
       date_creation: '2010-01-01',
       forme_juridique: mock.forme_juridique,
     };

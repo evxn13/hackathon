@@ -8,7 +8,8 @@ const manualCompanySchema = z.object({
   code_ape: z.string().optional(),
   effectif: z.string().optional(),
   localisation: z.string().optional(),
-  code_postal: z.string().optional(),
+  code_postaux: z.array(z.string().regex(/^\d{5}$/, 'Code postal invalide'))
+    .min(1, 'Au moins un code postal est requis'),
   forme_juridique: z.string().optional(),
   emploi_handicap: z.boolean().optional(),
 });
@@ -52,7 +53,8 @@ export async function POST(request: NextRequest) {
       code_ape: data.code_ape || null,
       effectif: data.effectif || 'Non renseigné',
       localisation: data.localisation || 'Non renseigné',
-      code_postal: data.code_postal || null,
+      code_postal: data.code_postaux[0], // Keep first for backward compatibility
+      code_postaux: data.code_postaux, // New array field
       forme_juridique: data.forme_juridique || 'Non renseignée',
       emploi_handicap: data.emploi_handicap || false,
       date_creation: new Date().toISOString().split('T')[0],

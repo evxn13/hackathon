@@ -6,7 +6,7 @@ import { Badge } from '@/components/ui/Badge';
 import { Button } from '@/components/ui/Button';
 import { AideRecommendation, NiveauAide, Company } from '@/lib/types';
 import { getAideTypeColor, getNiveauColor } from '@/lib/utils';
-import { getGeoContext, getNiveauLabel } from '@/lib/geo-utils';
+import { getMultiGeoContext, getNiveauLabel } from '@/lib/geo-utils';
 import { ExternalLink, Trash2, CheckCircle2, ChevronDown, ChevronUp, Sparkles, MapPin } from 'lucide-react';
 
 interface AidesGeoDisplayProps {
@@ -54,7 +54,12 @@ export function AidesGeoDisplay({ aides, company, onAideDeleted }: AidesGeoDispl
   const [expandedLevels, setExpandedLevels] = useState<Set<string>>(new Set(['top']));
   const [deletingId, setDeletingId] = useState<string | null>(null);
 
-  const geoContext = useMemo(() => getGeoContext(company.code_postal || ''), [company.code_postal]);
+  // Use code_postaux array if available, fallback to single code_postal for backward compatibility
+  const postalCodes = company.code_postaux && company.code_postaux.length > 0
+    ? company.code_postaux
+    : company.code_postal ? [company.code_postal] : [];
+
+  const geoContext = useMemo(() => getMultiGeoContext(postalCodes), [postalCodes]);
 
   // Meilleure aide (recommandation IA)
   const topAide = useMemo(() => {
@@ -88,11 +93,13 @@ export function AidesGeoDisplay({ aides, company, onAideDeleted }: AidesGeoDispl
   const getLevelDescription = (level: string): string => {
     switch (level) {
       case 'local':
-        return geoContext.metropole || 'Aides locales et métropolitaines';
+        return geoContext.metropoles.length > 0
+          ? geoContext.metropoles.join(', ')
+          : 'Aides locales et métropolitaines';
       case 'départemental':
-        return geoContext.departementName;
+        return geoContext.departementsNames.join(', ');
       case 'régional':
-        return geoContext.region;
+        return geoContext.regions.join(', ');
       case 'national':
         return 'Aides nationales françaises';
       case 'européen':
@@ -240,22 +247,32 @@ export function AidesGeoDisplay({ aides, company, onAideDeleted }: AidesGeoDispl
       <div className="bg-gradient-to-r from-blue-600 to-indigo-600 rounded-2xl p-6 text-white">
         <div className="flex items-center gap-2 mb-3">
           <MapPin className="w-5 h-5" />
-          <h3 className="text-lg font-semibold">Votre localisation</h3>
+          <h3 className="text-lg font-semibold">Votre zone d'activité</h3>
         </div>
+
+        {/* Postal codes display */}
+        <div className="mb-4 flex flex-wrap gap-2">
+          {geoContext.codePostaux.map((cp) => (
+            <div key={cp} className="px-3 py-1 bg-white/20 rounded-full text-sm font-medium">
+              {cp}
+            </div>
+          ))}
+        </div>
+
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3 text-sm">
-          {geoContext.metropole && (
+          {geoContext.metropoles.length > 0 && (
             <div>
-              <div className="text-blue-200">Métropole</div>
-              <div className="font-semibold">{geoContext.metropole}</div>
+              <div className="text-blue-200">Métropole{geoContext.metropoles.length > 1 ? 's' : ''}</div>
+              <div className="font-semibold">{geoContext.metropoles.join(', ')}</div>
             </div>
           )}
           <div>
-            <div className="text-blue-200">Département</div>
-            <div className="font-semibold">{geoContext.departementName}</div>
+            <div className="text-blue-200">Département{geoContext.departementsNames.length > 1 ? 's' : ''}</div>
+            <div className="font-semibold">{geoContext.departementsNames.join(', ')}</div>
           </div>
           <div>
-            <div className="text-blue-200">Région</div>
-            <div className="font-semibold">{geoContext.region}</div>
+            <div className="text-blue-200">Région{geoContext.regions.length > 1 ? 's' : ''}</div>
+            <div className="font-semibold">{geoContext.regions.join(', ')}</div>
           </div>
           <div>
             <div className="text-blue-200">Total aides</div>

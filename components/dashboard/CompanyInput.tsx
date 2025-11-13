@@ -5,7 +5,7 @@ import { Input } from '@/components/ui/Input';
 import { Button } from '@/components/ui/Button';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/Card';
 import { formatSiret, validateSiret } from '@/lib/utils';
-import { Building2, Search, Edit3 } from 'lucide-react';
+import { Building2, Search, Edit3, MapPin } from 'lucide-react';
 
 interface CompanyInputProps {
   onCompanyFound: (company: any) => void;
@@ -24,10 +24,13 @@ export function CompanyInput({ onCompanyFound }: CompanyInputProps) {
     code_ape: '',
     effectif: '',
     localisation: '',
-    code_postal: '',
     forme_juridique: '',
     emploi_handicap: false,
   });
+
+  // Multiple postal codes support
+  const [codePostaux, setCodePostaux] = useState<string[]>([]);
+  const [currentCodePostal, setCurrentCodePostal] = useState('');
 
   const handleSiretSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -75,6 +78,12 @@ export function CompanyInput({ onCompanyFound }: CompanyInputProps) {
       return;
     }
 
+    // Validation: au moins un code postal requis
+    if (codePostaux.length === 0) {
+      setError('Veuillez ajouter au moins un code postal');
+      return;
+    }
+
     setIsLoading(true);
 
     try {
@@ -83,7 +92,10 @@ export function CompanyInput({ onCompanyFound }: CompanyInputProps) {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(manualData),
+        body: JSON.stringify({
+          ...manualData,
+          code_postaux: codePostaux,
+        }),
       });
 
       const data = await response.json();
@@ -118,6 +130,45 @@ export function CompanyInput({ onCompanyFound }: CompanyInputProps) {
       [field]: e.target.value,
     }));
     setError('');
+  };
+
+  const validateCodePostal = (code: string): boolean => {
+    // Must be exactly 5 digits
+    return /^\d{5}$/.test(code);
+  };
+
+  const handleAddCodePostal = () => {
+    const trimmed = currentCodePostal.trim();
+
+    if (!trimmed) {
+      setError('Veuillez entrer un code postal');
+      return;
+    }
+
+    if (!validateCodePostal(trimmed)) {
+      setError('Le code postal doit contenir exactement 5 chiffres (ex: 75000, 13001)');
+      return;
+    }
+
+    if (codePostaux.includes(trimmed)) {
+      setError('Ce code postal est déjà ajouté');
+      return;
+    }
+
+    setCodePostaux([...codePostaux, trimmed]);
+    setCurrentCodePostal('');
+    setError('');
+  };
+
+  const handleRemoveCodePostal = (code: string) => {
+    setCodePostaux(codePostaux.filter(c => c !== code));
+  };
+
+  const handleCodePostalKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      handleAddCodePostal();
+    }
   };
 
   return (
@@ -234,22 +285,66 @@ export function CompanyInput({ onCompanyFound }: CompanyInputProps) {
               />
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <Input
-                label="Ville"
-                value={manualData.localisation}
-                onChange={handleManualChange('localisation')}
-                placeholder="Ex: Marseille"
-                disabled={isLoading}
-              />
+            <Input
+              label="Ville"
+              value={manualData.localisation}
+              onChange={handleManualChange('localisation')}
+              placeholder="Ex: Marseille"
+              disabled={isLoading}
+            />
 
-              <Input
-                label="Code postal"
-                value={manualData.code_postal}
-                onChange={handleManualChange('code_postal')}
-                placeholder="Ex: 13001"
-                disabled={isLoading}
-              />
+            {/* Multiple Postal Codes Input */}
+            <div className="space-y-2">
+              <label className="block text-sm font-medium text-gray-700">
+                Codes postaux * <span className="text-xs text-gray-500">(zones géographiques d'activité)</span>
+              </label>
+
+              <div className="flex gap-2">
+                <Input
+                  value={currentCodePostal}
+                  onChange={(e) => {
+                    const value = e.target.value.replace(/\D/g, '').slice(0, 5);
+                    setCurrentCodePostal(value);
+                    setError('');
+                  }}
+                  onKeyPress={handleCodePostalKeyPress}
+                  placeholder="Ex: 13001"
+                  disabled={isLoading}
+                  helperText="5 chiffres - Appuyez sur Entrée ou cliquez sur Ajouter"
+                />
+                <Button
+                  type="button"
+                  variant="outline"
+                  onClick={handleAddCodePostal}
+                  disabled={isLoading || !currentCodePostal}
+                  className="mt-0"
+                >
+                  Ajouter
+                </Button>
+              </div>
+
+              {/* Liste des codes postaux ajoutés */}
+              {codePostaux.length > 0 && (
+                <div className="flex flex-wrap gap-2 p-3 bg-blue-50 border border-blue-200 rounded-lg">
+                  {codePostaux.map((code) => (
+                    <div
+                      key={code}
+                      className="flex items-center gap-2 px-3 py-1 bg-white border border-blue-300 rounded-md"
+                    >
+                      <MapPin className="w-3 h-3 text-blue-600" />
+                      <span className="text-sm font-medium text-gray-900">{code}</span>
+                      <button
+                        type="button"
+                        onClick={() => handleRemoveCodePostal(code)}
+                        disabled={isLoading}
+                        className="text-red-500 hover:text-red-700"
+                      >
+                        ×
+                      </button>
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
 
             <Input

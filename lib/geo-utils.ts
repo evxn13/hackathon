@@ -76,3 +76,53 @@ export function getGeoContext(codePostal: string): GeoContext {
     metropole: getMetropoleFromCodePostal(codePostal),
   };
 }
+
+/**
+ * Get aggregated geographic context from multiple postal codes
+ * Returns unique départements, régions, and métropoles
+ */
+export interface MultiGeoContext {
+  codePostaux: string[];
+  departements: string[];
+  departementsNames: string[];
+  regions: string[];
+  metropoles: string[];
+  primaryLocation: GeoContext; // The first postal code's full context
+}
+
+export function getMultiGeoContext(codePostaux: string[]): MultiGeoContext {
+  if (!codePostaux || codePostaux.length === 0) {
+    // Return empty context
+    return {
+      codePostaux: [],
+      departements: [],
+      departementsNames: [],
+      regions: [],
+      metropoles: [],
+      primaryLocation: {
+        codePostal: '',
+        departement: '',
+        departementName: 'Non renseigné',
+        region: 'France',
+        metropole: null,
+      },
+    };
+  }
+
+  const contexts = codePostaux.map(cp => getGeoContext(cp));
+
+  // Get unique values
+  const departements = [...new Set(contexts.map(c => c.departement))];
+  const departementsNames = [...new Set(contexts.map(c => c.departementName))];
+  const regions = [...new Set(contexts.map(c => c.region))];
+  const metropoles = [...new Set(contexts.map(c => c.metropole).filter(m => m !== null))] as string[];
+
+  return {
+    codePostaux,
+    departements,
+    departementsNames,
+    regions,
+    metropoles,
+    primaryLocation: contexts[0],
+  };
+}
