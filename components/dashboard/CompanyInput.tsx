@@ -141,7 +141,7 @@ export function CompanyInput({ onCompanyFound }: CompanyInputProps) {
         <div className="flex gap-2 mb-6">
           <Button
             type="button"
-            variant={mode === 'siret' ? 'default' : 'outline'}
+            variant={mode === 'siret' ? 'primary' : 'outline'}
             size="sm"
             onClick={() => setMode('siret')}
             className="flex-1"
@@ -151,7 +151,7 @@ export function CompanyInput({ onCompanyFound }: CompanyInputProps) {
           </Button>
           <Button
             type="button"
-            variant={mode === 'manual' ? 'default' : 'outline'}
+            variant={mode === 'manual' ? 'primary' : 'outline'}
             size="sm"
             onClick={() => setMode('manual')}
             className="flex-1"
