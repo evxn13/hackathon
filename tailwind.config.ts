@@ -23,6 +23,8 @@ const config: Config = {
           950: '#172554',
         },
       },
+
+      /* 🔥 AJOUT ICI : KEYFRAMES + ANIMATE pour effet Liquid Glass */
       keyframes: {
         fadeInUp: {
           '0%': {
@@ -34,9 +36,21 @@ const config: Config = {
             transform: 'translateY(0)',
           },
         },
+
+        /* 💧 Animation Morphing du container Liquid Glass */
+        morph: {
+          '0%, 100%': { borderRadius: '1.5rem' },
+          '25%': { borderRadius: '2rem 1rem 2rem 1rem' },
+          '50%': { borderRadius: '1rem 2rem 1rem 2rem' },
+          '75%': { borderRadius: '2rem 2rem 1.5rem 1rem' },
+        },
       },
+
       animation: {
         'fade-in-up': 'fadeInUp 0.35s ease-out',
+
+        /* 💧 Animation Liquid Glass */
+        morph: 'morph 10s ease-in-out infinite',
       },
     },
   },

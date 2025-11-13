@@ -8,10 +8,10 @@ import { ArrowRight, Building2, Sparkles, TrendingUp, CheckCircle2 } from 'lucid
 
 // Mots qui tournent
 const rotatingWords = [
-  'subventions publiques',
-  'aides régionales',
-  'financements BPI',
-  'accompagnements experts',
+  'Subventions publiques',
+  'Aides régionales',
+  'Financements BPI',
+  'Accompagnements experts',
 ];
 
 export default function HomePage() {
@@ -55,79 +55,162 @@ export default function HomePage() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-primary-50 via-blue-50 to-white">
       {/* Header */}
-      <header className="border-b border-gray-200 bg-white/80 backdrop-blur-sm">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-2">
-              <Building2 className="w-8 h-8 text-primary-600" />
-              <h1 className="text-2xl font-bold text-primary-700">Assistant Aides</h1>
-            </div>
-            <div className="flex items-center gap-4">
-              <Link href="/auth/login">
-                <Button variant="ghost" size="sm">Connexion</Button>
-              </Link>
-              <Link href="/auth/register">
-                <Button size="sm">Créer un compte</Button>
-              </Link>
-            </div>
+      <header className="sticky top-0 z-50">
+        <div className="
+    absolute inset-0 
+    bg-white/40 
+    backdrop-blur-xl 
+    border-b border-white/30
+  " />
+
+        <div className="relative max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+
+          {/* Logo */}
+          <div className="flex items-center gap-2">
+            <Building2 className="w-7 h-7 text-primary-600" />
+            <span className="text-xl font-semibold text-primary-700">
+              Assistant Aides
+            </span>
           </div>
+
+          {/* Menu */}
+          <nav className="flex items-center gap-4">
+
+            <Link href="/auth/login">
+              <Button
+                variant="ghost"
+                className="
+            px-4 py-2 text-sm
+            text-gray-700 
+            hover:text-primary-600
+            transition
+          "
+              >
+                Connexion
+              </Button>
+            </Link>
+
+            <Link href="/auth/register">
+              <Button
+                className="
+            px-5 py-2 text-sm
+            bg-primary-600 text-white
+            rounded-full
+            hover:bg-primary-500
+            shadow-sm
+          "
+              >
+                Créer un compte
+              </Button>
+            </Link>
+
+          </nav>
         </div>
       </header>
 
       {/* HERO SECTION */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-        <div className="max-w-4xl mx-auto text-center lg:text-left">
+        {/* Wrapper liquid glass */}
+        <div className="relative w-full max-w-6xl mx-auto">
 
-          {/* Badge */}
-          <div className="flex items-center justify-center lg:justify-start gap-3 mb-6">
-            <span className="hidden sm:inline-block h-[2px] w-10 rounded-full bg-primary-400" />
-            <span className="inline-flex items-center rounded-full bg-primary-600 px-4 py-1 text-sm font-medium text-white shadow-lg">
-              Développement Web & Aides aux Entreprises
-            </span>
-          </div>
+          {/* Fond glass */}
+          <div
+            className="
+        absolute inset-0 
+        rounded-[32px]
+        bg-white/5 
+        backdrop-blur-2xl 
+        border border-white/60
+        shadow-[0_24px_80px_rgba(15,23,42,0.18)]
+        animate-morph
+      "
+          />
 
-          {/* TITRE PRINCIPAL */}
-          <h1 className="text-4xl md:text-6xl font-bold mb-2 leading-tight">
-            <span className="block text-gray-900">Solutions</span>
+          {/* Petit reflet en haut */}
+          <div
+            className="
+        pointer-events-none
+        absolute inset-x-0 top-0 h-1/2
+        rounded-t-[32px]
+        bg-gradient-to-b from-white/40 via-white/10 to-transparent
+      "
+          />
 
-            {/* Ligne animée façon WebCoreDB */}
-            <span className="text-primary-600 font-extrabold block text-5xl md:text-7xl my-2 drop-shadow-md whitespace-nowrap">
+          {/* CONTENU */}
+          <div className="relative px-8 py-10 sm:px-12 sm:py-14 text-center lg:text-left">
+            {/* Badge */}
+            <div className="flex items-center justify-center lg:justify-start gap-3 mb-6">
+              <span className="hidden sm:inline-block h-[2px] w-10 rounded-full bg-primary-400" />
+              <span className="inline-flex items-center rounded-full bg-primary-600 px-4 py-1 text-sm font-medium text-white shadow-lg">
+                Développement Web & Aides aux Entreprises
+              </span>
+            </div>
 
-              {/* Texte animé */}
-              <span className="inline-block whitespace-nowrap">
-                {displayText}
+            {/* TITRE PRINCIPAL */}
+            <h1 className="text-4xl md:text-6xl font-bold mb-2 leading-tight">
+              <span className="block text-gray-900">Solutions</span>
+
+              <span className="text-primary-600 font-extrabold block text-5xl md:text-7xl my-2 drop-shadow-md whitespace-nowrap">
+                <span className="inline-block whitespace-nowrap">
+                  {displayText}
+                </span>
+                <span className="inline-block text-primary-500 animate-pulse ml-1">|</span>
               </span>
 
-              {/* Curseur */}
-              <span className="inline-block text-primary-500 animate-pulse ml-1">|</span>
-            </span>
+              <span className="block text-gray-900">pour votre entreprise</span>
+            </h1>
 
-            <span className="block text-gray-900">pour votre entreprise</span>
-          </h1>
+            <p className="text-xl text-gray-600 mt-4 mb-10 leading-relaxed max-w-2xl mx-auto lg:mx-0">
+              Notre assistant intelligent analyse automatiquement votre entreprise
+              et vous propose les subventions, accompagnements et financements les plus pertinents.
+            </p>
 
-          <p className="text-xl text-gray-600 mt-4 mb-10 leading-relaxed max-w-2xl mx-auto lg:mx-0">
-            Notre assistant intelligent analyse automatiquement votre entreprise
-            et vous propose les subventions, accompagnements et financements les plus pertinents.
-          </p>
+            {/* CTA */}
+            <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
 
-          {/* CTA */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-            <Link href="/auth/register">
-              <Button size="lg" className="text-lg px-8">
-                Commencer l’analyse
-                <ArrowRight className="w-5 h-5 ml-2" />
-              </Button>
-            </Link>
-            <Link href="/auth/login">
-              <Button size="lg" variant="outline" className="text-lg px-8">
-                Se connecter
-              </Button>
-            </Link>
+              <Link href="/auth/register">
+                <Button
+                  size="lg"
+                  className="
+      text-base px-8 py-4
+      rounded-full
+      bg-primary-600 text-white
+      shadow-[0_8px_28px_rgba(37,99,235,0.28)]
+      hover:bg-primary-500
+      hover:shadow-[0_12px_38px_rgba(37,99,235,0.35)]
+      transition-all
+    "
+                >
+                  Commencer l’analyse
+                  <ArrowRight className="w-4 h-4 ml-2" />
+                </Button>
+              </Link>
+
+              <Link href="/auth/login">
+                <Button
+                  variant="outline"
+                  className="
+      text-base px-8 py-4
+      rounded-full
+      bg-white/60
+      backdrop-blur-sm
+      text-primary-700
+      border border-primary-200
+      hover:bg-white/80
+      transition
+    "
+                >
+                  Se connecter
+                </Button>
+              </Link>
+
+            </div>
+
           </div>
         </div>
       </section>
 
-      {/* FEATURES — (inchangé) */}
+      {/* FEATURES */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
 
@@ -176,7 +259,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* BENEFICES – inchangé */}
+      {/* BENEFICES */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <Card variant="bordered" className="bg-white">
           <CardContent className="p-10">
