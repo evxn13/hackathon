@@ -48,6 +48,11 @@ function getOfficialLink(aide: AideRecommendation): string {
     return 'https://www.pole-emploi.fr/employeur/vos-aides-financieres.html';
   }
 
+  // AGEFIPH (Association de Gestion du Fonds pour l'Insertion Professionnelle des Personnes Handicapées)
+  if (organisme.includes('agefiph') || titre.includes('agefiph') || titre.includes('handicap') || titre.includes('handicapé')) {
+    return 'https://www.agefiph.fr/aides-handicap';
+  }
+
   // URSSAF / Aide à l'embauche
   if (titre.includes('embauche') || organisme.includes('urssaf')) {
     return 'https://www.urssaf.fr/portail/home/employeur/beneficier-dune-exoneration/les-aides-a-lembauche.html';

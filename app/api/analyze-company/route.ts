@@ -72,16 +72,19 @@ function buildAnalysisPrompt(company: any): string {
 Analyse le profil de cette entreprise et génère une liste d'aides pertinentes :
 
 **Profil de l'entreprise :**
-- SIRET : ${company.siret}
+- SIRET : ${company.siret || 'Non renseigné (saisie manuelle)'}
 - Dénomination : ${company.denomination}
-- Secteur d'activité : ${company.secteur} (Code APE: ${company.code_ape})
+- Secteur d'activité : ${company.secteur} (Code APE: ${company.code_ape || 'Non renseigné'})
 - Effectif : ${company.effectif}
 - Localisation : ${company.localisation}, ${company.code_postal}
 - Forme juridique : ${company.forme_juridique || 'Non renseignée'}
-- Date de création : ${company.date_creation}
+- Date de création : ${company.date_creation || 'Non renseignée'}
+- Emploi de travailleurs handicapés : ${company.emploi_handicap ? 'OUI - IMPORTANT: Inclure impérativement des aides AGEFIPH et liées au handicap' : 'Non'}
 
 **Instructions :**
-Génère une liste de 8 à 12 aides pertinentes adaptées à ce profil. Priorise :
+Génère une liste de 8 à 12 aides pertinentes adaptées à ce profil.
+
+${company.emploi_handicap ? '⚠️ PRIORITÉ ABSOLUE: Cette entreprise emploie ou souhaite employer des travailleurs en situation de handicap. INCLURE OBLIGATOIREMENT au moins 2-3 aides spécifiques:\n- Aides AGEFIPH (aide à l\'embauche, maintien dans l\'emploi)\n- Aides à l\'adaptation du poste de travail\n- Reconnaissance Travailleur Handicapé (RQTH)\n- Contrats aidés pour travailleurs handicapés\n\n' : ''}Priorise :
 1. Les aides métropolitaines (Métropole Aix-Marseille-Provence)
 2. Les aides régionales (Région Sud - PACA)
 3. Les aides nationales (BPI France, ADEME, etc.)

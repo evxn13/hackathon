@@ -26,6 +26,7 @@ export function CompanyInput({ onCompanyFound }: CompanyInputProps) {
     localisation: '',
     code_postal: '',
     forme_juridique: '',
+    emploi_handicap: false,
   });
 
   const handleSiretSubmit = async (e: React.FormEvent) => {
@@ -258,6 +259,34 @@ export function CompanyInput({ onCompanyFound }: CompanyInputProps) {
               placeholder="Ex: SARL, SAS, Auto-entrepreneur..."
               disabled={isLoading}
             />
+
+            {/* Checkbox Emploi Handicap */}
+            <div className="flex items-start gap-3 p-4 bg-blue-50 border border-blue-200 rounded-lg">
+              <input
+                type="checkbox"
+                id="emploi_handicap"
+                checked={manualData.emploi_handicap}
+                onChange={(e) =>
+                  setManualData((prev) => ({
+                    ...prev,
+                    emploi_handicap: e.target.checked,
+                  }))
+                }
+                disabled={isLoading}
+                className="mt-1 h-4 w-4 text-primary-600 border-gray-300 rounded focus:ring-primary-500"
+              />
+              <div className="flex-1">
+                <label
+                  htmlFor="emploi_handicap"
+                  className="text-sm font-medium text-gray-900 cursor-pointer"
+                >
+                  J'emploie ou je souhaite employer des travailleurs en situation de handicap
+                </label>
+                <p className="text-xs text-gray-600 mt-1">
+                  Accédez à des aides spécifiques (AGEFIPH, aides à l'embauche, adaptation de poste...)
+                </p>
+              </div>
+            </div>
 
             {error && (
               <div className="p-3 bg-red-50 border border-red-200 rounded-lg">

@@ -10,6 +10,7 @@ const manualCompanySchema = z.object({
   localisation: z.string().optional(),
   code_postal: z.string().optional(),
   forme_juridique: z.string().optional(),
+  emploi_handicap: z.boolean().optional(),
 });
 
 export async function POST(request: NextRequest) {
@@ -53,6 +54,7 @@ export async function POST(request: NextRequest) {
       localisation: data.localisation || 'Non renseigné',
       code_postal: data.code_postal || null,
       forme_juridique: data.forme_juridique || 'Non renseignée',
+      emploi_handicap: data.emploi_handicap || false,
       date_creation: new Date().toISOString().split('T')[0],
       created_at: new Date().toISOString(),
     };
