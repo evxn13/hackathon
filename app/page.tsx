@@ -54,59 +54,56 @@ export default function HomePage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-primary-50 via-blue-50 to-white">
-      {/* Header */}
-      <header className="sticky top-0 z-50">
-        <div className="
-    absolute inset-0 
-    bg-white/40 
-    backdrop-blur-xl 
-    border-b border-white/30
-  " />
+<header className="sticky top-4 z-50 px-4">
+  <div
+    className="
+      relative 
+      max-w-7xl mx-auto 
+      px-6 py-3
+      flex items-center justify-between
+      bg-white/40 
+      backdrop-blur-xl 
+      border border-white/30 
+      rounded-[25px]
+      shadow-lg
+    "
+  >
+    {/* Logo */}
+    <div className="flex items-center gap-3">
+      <img
+        src="/Logo.png"
+        alt="Eligence.ai Logo"
+        className="w-16 h-16 object-contain"
+      />
+      <span className="text-2xl font-semibold text-primary-700 tracking-tight">
+        Eligence.ai
+      </span>
+    </div>
 
-        <div className="relative max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+    {/* Menu */}
+    <nav className="flex items-center gap-8">
+      <Link href="/auth/login">
+        <span className="text-base text-gray-700 hover:text-primary-600 transition">
+          Connexion
+        </span>
+      </Link>
 
-          {/* Logo */}
-          <div className="flex items-center gap-2">
-            <Building2 className="w-7 h-7 text-primary-600" />
-            <span className="text-xl font-semibold text-primary-700">
-              Assistant Aides
-            </span>
-          </div>
-
-          {/* Menu */}
-          <nav className="flex items-center gap-4">
-
-            <Link href="/auth/login">
-              <Button
-                variant="ghost"
-                className="
-            px-4 py-2 text-sm
-            text-gray-700 
-            hover:text-primary-600
-            transition
+      <Link href="/auth/register">
+        <span
+          className="
+            px-6 py-2.5
+            text-base
+            bg-primary-600 text-white 
+            rounded-full hover:bg-primary-500 transition
+            shadow-md
           "
-              >
-                Connexion
-              </Button>
-            </Link>
-
-            <Link href="/auth/register">
-              <Button
-                className="
-            px-5 py-2 text-sm
-            bg-primary-600 text-white
-            rounded-full
-            hover:bg-primary-500
-            shadow-sm
-          "
-              >
-                Créer un compte
-              </Button>
-            </Link>
-
-          </nav>
-        </div>
-      </header>
+        >
+          Créer un compte
+        </span>
+      </Link>
+    </nav>
+  </div>
+</header>
 
       {/* HERO SECTION */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
@@ -313,19 +310,23 @@ export default function HomePage() {
 
             <Link href="/auth/register">
               <Button
-                size="lg"
                 className="
-    text-lg px-8 
-    bg-white/20 backdrop-blur-md text-white border border-white/40 
-    hover:bg-white/30 hover:border-white/60 
-    transition-all duration-300
-  "
+      text-xl font-semibold       /* texte plus grand */
+      px-12 py-4                 /* largeur + hauteur */
+      rounded-2xl               /* arrondi large */
+      bg-white/20 backdrop-blur-md 
+      border border-white/50 
+      text-white
+      hover:bg-white/30 hover:border-white/60
+      transition-all duration-300
+      shadow-[0_8px_25px_rgba(0,0,0,0.15)]   /* option : ombre douce */
+    "
               >
                 Créer mon compte gratuitement
-                <ArrowRight className="w-5 h-5 ml-2" />
+                <ArrowRight className="w-6 h-6 ml-3" />
               </Button>
-
             </Link>
+
           </CardContent>
         </Card>
       </section>
