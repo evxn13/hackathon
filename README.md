@@ -262,10 +262,10 @@ MIT License - Code4Sud Hackathon 2025
 
 ## 👥 Équipe
 
-Raphael - rdmrdm3@gmail.com (CEO)
-Evan - evanscheid42@gmail.com (Fullstack developer / CTO)
-Lucas - lucas.lipari@epitech.eu (Front-end developer)
-Victor - nyomixpro@gmail.com (Prompt enginer / Whitelisting Url)
-Lisa - mail comming soon...(Prompt enginer / Whitelisting Url)
+- Raphael - rdmrdm3@gmail.com (CEO)
+- Evan - evanscheid42@gmail.com (Fullstack developer / CTO)
+- Lucas - lucas.lipari@epitech.eu (Front-end developer)
+- Victor - nyomixpro@gmail.com (Prompt enginer / Whitelisting Url)
+- Lisa - mail comming soon...(Prompt enginer / Whitelisting Url)
 
-Projet développé pour résoudre la problématique de l'accès aux aides pour les TPE/PME.
+- Projet développé pour résoudre la problématique de l'accès aux aides pour les TPE/PME.
